@@ -1,11 +1,8 @@
 package com.GerenciadorCondominio.GerenciadorCondominio.controller;
 
 
-import com.GerenciadorCondominio.GerenciadorCondominio.dto.CondominioDto;
 import com.GerenciadorCondominio.GerenciadorCondominio.dto.ProprietarioDto;
-import com.GerenciadorCondominio.GerenciadorCondominio.model.Proprietario;
 import com.GerenciadorCondominio.GerenciadorCondominio.service.ProprietarioService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

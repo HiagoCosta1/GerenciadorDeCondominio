@@ -18,7 +18,6 @@ public class CondominioService {
 
     private final CondominioRepository condominioRepository;
 
-    @Autowired
     public CondominioService (CondominioRepository condominioRepository){
         this.condominioRepository = condominioRepository;
     }
