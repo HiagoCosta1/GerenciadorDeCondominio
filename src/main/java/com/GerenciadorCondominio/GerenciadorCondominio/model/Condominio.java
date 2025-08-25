@@ -1,9 +1,9 @@
 package com.GerenciadorCondominio.GerenciadorCondominio.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class  Condominio {
@@ -16,6 +16,10 @@ public class  Condominio {
     private String cnpj;
     private Integer qtdBlocos;
     private Integer qtdApartamentos;
+
+    @OneToMany(mappedBy = "condominio", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Apartamento> apartamentos = new ArrayList<>();
+
 
 
     public Condominio(){
@@ -81,7 +85,14 @@ public class  Condominio {
         this.qtdApartamentos = qtdApartamentos;
     }
 
+    public List<Apartamento> getApartamentos() {
+        return apartamentos;
     }
+
+    public void setApartamentos(List<Apartamento> apartamentos) {
+        this.apartamentos = apartamentos;
+    }
+}
 
 
 

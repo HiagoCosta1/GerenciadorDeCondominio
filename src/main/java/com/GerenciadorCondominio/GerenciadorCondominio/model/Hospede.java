@@ -1,10 +1,7 @@
 package com.GerenciadorCondominio.GerenciadorCondominio.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Hospede {
@@ -17,6 +14,9 @@ public class Hospede {
     private String telefone;
     private Integer numApart;
     private String autorizadoPor;
+
+    @ManyToOne
+    private Apartamento apartamento;
 
     public Hospede(){
 
@@ -77,5 +77,13 @@ public class Hospede {
 
     public void setAutorizadoPor(String autorizadoPor) {
         this.autorizadoPor = autorizadoPor;
+    }
+
+    public Apartamento getApartamento() {
+        return apartamento;
+    }
+
+    public void setApartamento(Apartamento apartamento) {
+        this.apartamento = apartamento;
     }
 }

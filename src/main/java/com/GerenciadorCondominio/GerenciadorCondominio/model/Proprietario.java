@@ -1,9 +1,8 @@
 package com.GerenciadorCondominio.GerenciadorCondominio.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Proprietario {
@@ -16,6 +15,8 @@ public class Proprietario {
     private String cpf;
     private String telefone;
 
+    @OneToMany(mappedBy = "proprietario")
+    private List<Apartamento> apartamentos;
 
     public Proprietario(){
 
@@ -66,5 +67,13 @@ public class Proprietario {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public List<Apartamento> getApartamentos() {
+        return apartamentos;
+    }
+
+    public void setApartamentos(List<Apartamento> apartamentos) {
+        this.apartamentos = apartamentos;
     }
 }

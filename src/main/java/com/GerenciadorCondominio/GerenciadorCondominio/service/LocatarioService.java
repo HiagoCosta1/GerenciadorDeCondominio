@@ -2,9 +2,12 @@ package com.GerenciadorCondominio.GerenciadorCondominio.service;
 
 
 import com.GerenciadorCondominio.GerenciadorCondominio.dto.LocatarioDto;
+import com.GerenciadorCondominio.GerenciadorCondominio.model.Apartamento;
 import com.GerenciadorCondominio.GerenciadorCondominio.model.Locatario;
+import com.GerenciadorCondominio.GerenciadorCondominio.repository.ApartamentoRepository;
 import com.GerenciadorCondominio.GerenciadorCondominio.repository.LocatarioRepository;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +18,8 @@ import java.util.stream.Collectors;
 public class LocatarioService {
 
     private LocatarioRepository locatarioRepository;
+    @Autowired
+    private ApartamentoRepository apartamentoRepository;
 
     public LocatarioService(LocatarioRepository locatarioRepository){
         this.locatarioRepository = locatarioRepository;
@@ -33,6 +38,12 @@ public class LocatarioService {
         Locatario locatario = new Locatario();
         BeanUtils.copyProperties(dto, locatario);
 
+        if (dto.apartamentoId() != null) {
+            Apartamento apartamento = apartamentoRepository.findById(dto.apartamentoId())
+                    .orElseThrow(() -> new RuntimeException("Apartamento não encontrado"));
+            locatario.setApartamento(apartamento);
+        }
+
         Locatario salvo = locatarioRepository.save((locatario));
 
         return new LocatarioDto(salvo);
@@ -48,6 +59,11 @@ public class LocatarioService {
         Locatario locatarioExistente = locatarioRepository.findById(id).orElseThrow(()-> new RuntimeException("Locatario não encontrado"));
 
         BeanUtils.copyProperties(dto,locatarioExistente, "id");
+        if (dto.apartamentoId() != null) {
+            Apartamento apartamento = apartamentoRepository.findById(dto.apartamentoId())
+                    .orElseThrow(() -> new RuntimeException("Apartamento não encontrado"));
+            locatarioExistente.setApartamento(apartamento);
+        }
         Locatario atualizado = locatarioRepository.save(locatarioExistente);
 
         return new LocatarioDto(atualizado);

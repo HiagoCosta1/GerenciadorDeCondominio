@@ -1,23 +1,26 @@
 package com.GerenciadorCondominio.GerenciadorCondominio.dto;
-
 import com.GerenciadorCondominio.GerenciadorCondominio.model.Locatario;
-import com.GerenciadorCondominio.GerenciadorCondominio.model.Proprietario;
-
 import java.time.LocalDate;
 
-public record LocatarioDto(String nome, Integer numApart, String cpf, String telefone, LocalDate dataInicioContrato, LocalDate dataFimContrato) {
-
+public record LocatarioDto(
+        Long id,
+        String nome,
+        Long apartamentoId,
+        String cpf,
+        String telefone,
+        LocalDate dataInicioContrato,
+        LocalDate dataFimContrato
+) {
     public LocatarioDto(Locatario locatario){
         this(
+                locatario.getId(),
                 locatario.getNome(),
-                locatario.getNumApart(),
+                locatario.getApartamento() != null ? locatario.getApartamento().getId() : null,
                 locatario.getCpf(),
                 locatario.getTelefone(),
                 locatario.getDataInicioContrato(),
                 locatario.getDataFimContrato()
         );
     }
-
-
-
 }
+

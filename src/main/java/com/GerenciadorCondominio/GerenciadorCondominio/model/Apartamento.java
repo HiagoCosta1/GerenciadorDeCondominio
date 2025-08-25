@@ -1,10 +1,9 @@
 package com.GerenciadorCondominio.GerenciadorCondominio.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Apartamento {
@@ -16,6 +15,19 @@ public class Apartamento {
     private Integer numero;
     private Integer andar;
     private Boolean ocupado;
+
+    @ManyToOne
+    private Condominio condominio;
+
+    @ManyToOne
+    private Proprietario proprietario;
+
+    @OneToOne
+    private Locatario locatario;
+
+    @OneToMany(mappedBy = "apartamento")
+    private List<Hospede> hospedes;
+
 
     public Apartamento(){
 
@@ -58,5 +70,37 @@ public class Apartamento {
 
     public void setOcupado(Boolean ocupado) {
         this.ocupado = ocupado;
+    }
+
+    public Condominio getCondominio() {
+        return condominio;
+    }
+
+    public void setCondominio(Condominio condominio) {
+        this.condominio = condominio;
+    }
+
+    public Proprietario getProprietario() {
+        return proprietario;
+    }
+
+    public void setProprietario(Proprietario proprietario) {
+        this.proprietario = proprietario;
+    }
+
+    public Locatario getLocatario() {
+        return locatario;
+    }
+
+    public void setLocatario(Locatario locatario) {
+        this.locatario = locatario;
+    }
+
+    public List<Hospede> getHospedes() {
+        return hospedes;
+    }
+
+    public void setHospedes(List<Hospede> hospedes) {
+        this.hospedes = hospedes;
     }
 }

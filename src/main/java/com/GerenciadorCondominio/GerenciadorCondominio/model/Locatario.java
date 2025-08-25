@@ -1,9 +1,6 @@
 package com.GerenciadorCondominio.GerenciadorCondominio.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import javax.xml.crypto.Data;
 import java.time.LocalDate;
@@ -21,6 +18,9 @@ public class Locatario {
     private String telefone;
     private LocalDate dataInicioContrato;
     private LocalDate dataFimContrato;
+
+    @OneToOne(mappedBy = "locatario")
+    private Apartamento apartamento;
 
     public Locatario(){
 
@@ -90,5 +90,13 @@ public class Locatario {
 
     public void setDataFimContrato(LocalDate dataFimContrato) {
         this.dataFimContrato = dataFimContrato;
+    }
+
+    public Apartamento getApartamento() {
+        return apartamento;
+    }
+
+    public void setApartamento(Apartamento apartamento) {
+        this.apartamento = apartamento;
     }
 }
